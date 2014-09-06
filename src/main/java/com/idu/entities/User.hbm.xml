@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 5, 2014 3:35:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.idu.entities.User" table="user" catalog="db_iduwebsite">
+        <id name="userId" type="java.lang.Integer">
+            <column name="userId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="role" class="com.idu.entities.Role" fetch="select">
+            <column name="roleId" not-null="true" />
+        </many-to-one>
+        <property name="userName" type="string">
+            <column name="userName" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="pwd" type="string">
+            <column name="pwd" length="45" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="fullName" length="45" not-null="true" />
+        </property>
+        <property name="birthOfDay" type="date">
+            <column name="birthOfDay" length="10" not-null="true" />
+        </property>
+        <property name="gender" type="boolean">
+            <column name="gender" not-null="true" />
+        </property>
+        <property name="idCard" type="string">
+            <column name="idCard" length="15" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phoneNumber" length="105" />
+        </property>
+        <property name="avatarPath" type="string">
+            <column name="avatarPath" length="105" />
+        </property>
+        <property name="idActive" type="string">
+            <column name="idActive" length="45" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="active" not-null="true" />
+        </property>
+        <property name="idx" type="int">
+            <column name="idx" not-null="true" />
+        </property>
+        <set name="newses" table="news" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="com.idu.entities.News" />
+        </set>
+    </class>
+</hibernate-mapping>
