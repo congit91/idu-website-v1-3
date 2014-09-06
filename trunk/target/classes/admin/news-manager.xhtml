@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/admin/template.xhtml">
+
+	<ui:define name="content">
+	   News management
+	   <h:form>
+	   		<a href="news-add.jsf">add new</a>
+	   		Result:<h:outputLabel>${newsManagement.resultMes}</h:outputLabel>
+			<h:dataTable value="#{newsManagement.listNews}" var="news"
+				style="boder:1">
+				<h:column>
+					<f:facet name="header">Title</f:facet>
+					<h:commandLink action="#{newsManagement.preEdit(news)}">#{news.title}</h:commandLink>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					<h:outputLabel>#{news.timeCreated}</h:outputLabel>
+				</h:column>
+				<h:column>
+					<f:facet name="header">User</f:facet>
+					<h:outputLabel>#{news.user.userName}</h:outputLabel>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Category</f:facet>
+					<h:outputLabel>#{news.category.categoryName}</h:outputLabel>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Status</f:facet>
+					<h:outputLabel>#{news.active ? 'Enable':'Disable'}</h:outputLabel>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{newsManagement.delete(news.newsId)}" value="Delete" />
+					|<h:commandLink action="#{newsManagement.active(news)}" value="${news.active ? 'Disactive':'Active'}" />
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+</html>

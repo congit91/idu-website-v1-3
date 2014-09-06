@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 5, 2014 3:35:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.idu.entities.News" table="news" catalog="db_iduwebsite">
+        <id name="newsId" type="java.lang.Integer">
+            <column name="newsId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="category" class="com.idu.entities.Category" fetch="select">
+            <column name="categoryId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="com.idu.entities.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <property name="title" type="string">
+            <column name="title" length="200" not-null="true" unique="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="65535" not-null="true" />
+        </property>
+        <property name="timeCreated" type="date">
+            <column name="timeCreated" length="10" not-null="true" />
+        </property>
+        <property name="pathImage" type="string">
+            <column name="pathImage" length="200" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="active" not-null="true" />
+        </property>
+        <property name="idx" type="int">
+            <column name="idx" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

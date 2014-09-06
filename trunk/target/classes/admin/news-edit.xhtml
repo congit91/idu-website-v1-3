@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/admin/template.xhtml">
+
+	<ui:define name="content">
+	   Edit news
+	    <h:form id="frm" enctype="multipart/form-data">
+	   		Result:<h:outputLabel>${newsManagement.resultMes}</h:outputLabel>
+			<table>
+				<h:inputHidden value="#{newsManagement.currentNews.newsId}"/>
+				<h:inputHidden value="#{newsManagement.oldTitle}"/>
+				<tr>
+					<td>Title</td>
+					<td><h:inputText value="#{newsManagement.currentNews.title}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>Content</td>
+					<td><h:inputTextarea value="#{newsManagement.currentNews.content}"></h:inputTextarea></td>
+				</tr>
+				<tr>
+					<td>User</td>
+					<td>
+						<h:selectOneMenu value="#{newsManagement.currentNews.user}">
+							<f:converter binding="#{userConverter}"/>
+							<f:selectItems value="#{newsManagement.listUser}" var="item"
+								itemValue="#{item}" itemLabel="#{item.userName}" />
+						</h:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td>
+						<h:selectOneMenu value="#{newsManagement.currentNews.category}">
+							<f:converter binding="#{categoryConverter}"/>
+							<f:selectItems value="#{newsManagement.listCategory}" var="item"
+								itemValue="#{item}" itemLabel="#{item.categoryName}" />
+						</h:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td>Picture</td>
+					<td>
+						<h:inputFile id="file" value="#{newsManagement.image}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Active</td>
+					<td>
+						<h:selectOneMenu value="#{newsManagement.currentNews.active}">
+							<f:selectItem itemValue="true" itemLabel="True"/>
+							<f:selectItem itemValue="false" itemLabel="False"/>
+						</h:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td><h:commandButton value="Save" action="#{newsManagement.save()}"/></td>
+				</tr>
+			</table>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+</html>
